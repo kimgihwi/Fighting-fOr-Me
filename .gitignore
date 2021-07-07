@@ -1,2 +1,5 @@
 .idea
 ./quote_data
+
+*.txt
+*.ico

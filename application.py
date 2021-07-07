@@ -16,7 +16,7 @@ class App(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         # Application Window
-        self.setWindowTitle("정은성 화이팅")
+        self.setWindowTitle("Fighting fOr Me (FOM)")
         # self.setWindowIcon((QtGui.QIcon(abs_path + '/etc/icon.png')))
         self.setFixedSize(600, 200)
         self.center()
@@ -48,15 +48,15 @@ class App(QtWidgets.QMainWindow):
 
         # self.name_label.resize(50, 30)
         self.quote_label.resize(50, 50)
-        self.load_label.resize(300, 50)
+        self.load_label.resize(400, 100)
 
         # self.name_label.setFont(QtGui.QFont("나눔스퀘어라운드 Bold", 10))
         self.quote_label.setFont(QtGui.QFont("나눔스퀘어라운드 Bold", 10))
-        self.load_label.setFont(QtGui.QFont("나눔스퀘어라운드 Bold", 12))
+        self.load_label.setFont(QtGui.QFont("나눔스퀘어라운드 Bold", 10))
 
         # self.name_label.move(630, 50)
         self.quote_label.move(35, 120)
-        self.load_label.move(35, 50)
+        self.load_label.move(35, 10)
 
         ### 버튼 ###
         # self.name_btn = QtWidgets.QPushButton("확인", self)
@@ -69,7 +69,7 @@ class App(QtWidgets.QMainWindow):
         self.save_btn.clicked.connect(self.save_clicked)
 
         self.quote_btn = QtWidgets.QPushButton("나에게로 화이팅...!", self)
-        self.quote_btn.move(450, 50)
+        self.quote_btn.move(450, 30)
         self.quote_btn.resize(120, 50)
         self.quote_btn.clicked.connect(self.answer_clicked)
 
@@ -104,8 +104,17 @@ class App(QtWidgets.QMainWindow):
         """
         quote_num = len(os.listdir('./quote_data'))
         rand_num = random.randrange(1, quote_num+1)
-        f = open("./quote_data/" + str(rand_num) + ".txt", 'r')
-        quote = f.readline()
+        f = open("./quote_data/" + str(rand_num) + ".txt", 'r', encoding='utf-8')
+        # quote = f.readline()
+        quote = ""
+        lines = f.readlines()
+        for line in lines:
+            if len(line) > 30:
+                quote += line[:30]
+                quote += "\n"
+                quote += line[30:]
+            else:
+                quote += line + "\n"
         f.close()
         self.load_label.setText(quote)
 
