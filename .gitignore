@@ -1,5 +1,8 @@
 .idea
-./quote_data
+quote_data/*
 
 *.txt
 *.ico
+
+etc
+etc/*
